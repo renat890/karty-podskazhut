@@ -4,9 +4,30 @@
   box-sizing: border-box;
 }
 
+:root {
+  --bg-color: #f3efec;
+  --text-color: #312a4e;
+  --accent-color: #ffab6b;
+  --main-font: "Raleway";
+  --accent-font: "STIX Two Text";
+}
+
+.theme_dark {
+  --bg-color: #171717;
+  --text-color: #b3b3b3;
+  --accent-color: transparent;
+}
 .page {
+  background-color: var(--bg-color, #f3efec);
+  color: var(--text-color, #312a4e);
+  font-family: var(--main-font, serif);
   min-inline-size: 360px;
   margin: 0;
+}
+
+.content-section {
+  --padding-side: 5vi;
+  padding: 0 var(--padding-side);
 }
 
 p,
@@ -20,3 +41,227 @@ li,
 figure {
   margin: 0;
 }
+
+.heading {
+  font-family: var(--accent-font, serif);
+  font-weight: 600;
+  line-height: 90%;
+  text-align: center;
+}
+
+.header {
+  padding-top: 10%;
+}
+
+.header__title {
+  font-size: clamp(3.75rem, 2.5rem + 5.5556vw, 7.5rem);
+  margin-bottom: 40px;
+}
+
+.header__menu {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--text-color);
+  border-top: 1px solid var(--text-color);
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.header__theme-toggler ul {
+  display: flex;
+  list-style: none;
+  column-gap: 20px;
+}
+
+.header__theme-button {
+  font-family: inherit;
+  color: var(--text-color);
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+}
+
+.header__theme-button:focus,
+.content__paragraph-link:focus {
+  outline-color: currentColor;
+  text-decoration: none;
+}
+
+.header__theme-button:disabled {
+  pointer-events: none;
+}
+
+.header__theme-button_is-active {
+  font-weight: bold;
+  position: relative;
+}
+
+.header__theme-button_is-active::after {
+  position: absolute;
+  content: "";
+  width: calc(100% + 3px);
+  content: "";
+  top: 10px;
+  right: -1px;
+  height: 0.4em;
+  background-color: var(--accent-color);
+  z-index: -1;
+}
+
+.theme_dark .header__theme-button_is-active::after {
+  background-image: url("../images/pattern.svg");
+}
+
+.content-title {
+  font-size: 30px;
+  margin: 7% 0 2.5% 0;
+}
+
+.content__text-block {
+  font-size: 18px;
+}
+
+.content__text-block .content__paragraph:not(:last-child) {
+  margin-bottom: 1.5em;
+}
+
+.content__paragraph-link {
+  color: inherit;
+}
+
+.content__blockquote {
+  width: 75%;
+  margin: 0 auto 1.5em auto;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 200%;
+}
+
+.content__list {
+  list-style: none; /* Отключаем стандартные маркеры */
+  padding-inline-start: 40px; /* Устанавливаем внутренний отступ слева */
+}
+
+.content__list li {
+  position: relative; /* Для абсолютного позиционирования псевдоэлемента */
+  padding-left: 25px; /* Отступ для текста, чтобы не перекрывался с маркером */
+}
+
+.content__list li::before {
+  content: ""; /* Обязательное свойство для псевдоэлементов */
+  position: absolute;
+  left: 0;
+  top: 4px; /* Можно изменить для лучшего выравнивания с текстом */
+  width: 15px;
+  height: 15px;
+  background-image: url("../images/marker-light.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 15px;
+}
+
+.theme_dark .content__list li::before {
+  background-image: url("../images/marker-dark.svg");
+}
+
+.content__list li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.content__text-block_type_first-lettered
+  .content__paragraph:first-child::first-letter {
+  background-color: var(--accent-color);
+  padding: 0 4px;
+  margin-right: 1px;
+  display: inline-block;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 35px;
+}
+
+.theme_dark
+  .content__text-block_type_first-lettered
+  .content__paragraph:first-child::first-letter {
+  border: 1px solid var(--text-color);
+}
+
+.content__figure {
+  margin-top: 7%;
+  margin-bottom: 7%;
+  width: calc(100% + 10vi); /* 100% + левый отступ + правый отступ */
+  position: relative;
+  left: -5vi; /* Сдвиг влево на размер бокового отступа */
+}
+
+.content__picture {
+  width: 100%;
+}
+
+.content__picture-caption {
+  padding-bottom: 20px;
+  padding-top: 20px;
+  text-align: center;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  border-bottom: 1px solid var(--text-color);
+}
+
+.content__card {
+  aspect-ratio: 4 / 3;
+  margin-top: 7%;
+  border: 1px solid var(--text-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.content__card-title {
+  font-size: 60px;
+}
+
+.content__card-subtitle {
+  font-size: 18px;
+}
+
+.colored-text {
+  position: relative;
+}
+
+.colored-text::after {
+  position: absolute;
+  content: "";
+  top: 28px;
+  right: 0px;
+  width: calc(100% + 5px);
+  height: 0.3em;
+  background-color: var(--accent-color);
+  z-index: -1;
+}
+
+.theme_dark .colored-text::after {
+  background-image: url("../images/pattern.svg");
+}
+
+.content__card-title span {
+  display: inline-block;
+}
+
+.footer {
+  margin-top: 10%;
+  padding: 2.5%;
+  border-top: 1px solid var(--text-color);
+  display: flex;
+  justify-content: center;
+}
+
+.footer__copyright {
+  font-size: 18px;
+}
+
+/* Пустой коммент, чтоб Aсtions заработал */
